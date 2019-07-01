@@ -1,12 +1,12 @@
-# Project 3 - *Name of App Here*
+# Project 3 - *Twitter*
 
-**Name of your app** is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
+**Twitter** is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
 
 Time spent: **X** hours spent in total
 
 ## User Stories
 
-The following **required** functionality is completed:
+The following **5** functionality is completed:
 
 - [ ] User sees app icon in home screen and styled launch screen
 - [ ] User can sign in using OAuth login flow
@@ -69,7 +69,7 @@ List an 3rd party libraries, icons, graphics, or other assets you used in your a
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2019] [Alejandro Hernandez Lopez]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
