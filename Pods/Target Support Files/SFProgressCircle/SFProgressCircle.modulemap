@@ -1,0 +1,6 @@
+framework module SFProgressCircle {
+  umbrella header "SFProgressCircle-umbrella.h"
+
+  export *
+  module * { export * }
+}
