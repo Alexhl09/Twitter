@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Tweet.h"
-
+@import SFProgressCircle;
 NS_ASSUME_NONNULL_BEGIN
 @protocol ComposeViewControllerDelegate
 
@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 @interface ComposeViewController : UIViewController
+@property (weak, nonatomic) IBOutlet SFCircleGradientView *circleCountCharacters;
+@property (weak, nonatomic) IBOutlet UITextView *tweetTextView;
 @property (nonatomic, weak) id<ComposeViewControllerDelegate> delegate;
 @end
 

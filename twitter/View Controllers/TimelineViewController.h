@@ -10,5 +10,6 @@
 
 @interface TimelineViewController : UIViewController <UITableViewDataSource, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableViewTimeline;
-@property (strong, nonatomic) NSArray * myTweets;
+@property (strong, nonatomic) NSMutableArray * myTweets;
+-(void) getTimeline;
 @end

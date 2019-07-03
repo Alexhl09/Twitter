@@ -20,12 +20,20 @@
     
     if ([[APIManager shared] isAuthorized]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UINavigationController *navigationController = [storyboard instantiateViewControllerWithIdentifier:@"TweetsNavigationController"];
+        UINavigationController *navigationController = [storyboard instantiateViewControllerWithIdentifier:@"TweetsTabController"];
         self.window.rootViewController = navigationController;
+       
+
     }
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
+
+
     
     return YES;
 }
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

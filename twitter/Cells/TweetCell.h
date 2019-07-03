@@ -23,8 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *loveButton;
 @property (weak, nonatomic) IBOutlet UIButton *messageButton;
 
--(void) refreshData;
-    
+-(void) refreshDataAfterFavorite;
+-(void) refreshDataAfterRetweet;
 
 @end
 

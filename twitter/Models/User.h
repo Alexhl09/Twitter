@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 //My properties that I am going to use
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *screenName;
-
+@property (strong, nonatomic) NSURL * urlProfilePhoto;
 // Create initializer
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 @end

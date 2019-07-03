@@ -9,6 +9,7 @@
 #import "APIManager.h"
 #import "Tweet.h"
 
+
 static NSString * const baseURLString = @"https://api.twitter.com";
 static NSString * const consumerKey = @"5lUJuO5AUpPUCez4ewYDFrtgh";// Enter your consumer key here
 static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv1o2TKhS1avCdS"; // Enter your consumer secret here
@@ -19,7 +20,8 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
 
 @implementation APIManager
 
-+ (instancetype)shared {
++ (instancetype)shared
+{
     static APIManager *sharedManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -28,7 +30,8 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
     return sharedManager;
 }
 
-- (instancetype)init {
+- (instancetype)init
+{
     
     NSURL *baseURL = [NSURL URLWithString:baseURLString];
     NSString *key = consumerKey;
@@ -48,7 +51,8 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
     return self;
 }
 
-- (void)getHomeTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion {
+- (void)getHomeTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion
+{
     
     [self GET:@"1.1/statuses/home_timeline.json"
    parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable tweetDictionaries) {
@@ -64,7 +68,8 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
    }];
 }
 
-- (void)postStatusWithText:(NSString *)text completion:(void (^)(Tweet *, NSError *))completion{
+- (void)postStatusWithText:(NSString *)text completion:(void (^)(Tweet *, NSError *))completion
+{
     NSString *urlString = @"1.1/statuses/update.json";
     NSDictionary *parameters = @{@"status": text};
     
@@ -78,10 +83,12 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
     }];
 }
 
-- (void)favorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion{
+- (void)favorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion
+{
     
     NSString *urlString = @"1.1/favorites/create.json";
     NSDictionary *parameters = @{@"id": tweet.idStr};
+
     [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
         Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
         completion(tweet, nil);
@@ -90,7 +97,38 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
     }];
 }
 
-- (void)unfavorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion{
+- (void)retweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion
+{
+    
+    NSString *urlString = @"1.1/statuses/retweet/";
+    NSString * urlStringSecond = [urlString stringByAppendingString:tweet.idStr];
+    NSString * finalString = [urlStringSecond stringByAppendingString:@".json"];
+    NSDictionary *parameters = @{@"id": tweet.idStr};
+    [self POST:finalString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
+        Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
+        completion(tweet, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(nil, error);
+    }];
+}
+
+- (void)unretweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion
+{
+    
+    NSString *urlString = @"1.1/statuses/unretweet/";
+    NSString * urlStringSecond = [urlString stringByAppendingString:tweet.idStr];
+    NSString * finalString = [urlStringSecond stringByAppendingString:@".json"];
+    NSDictionary *parameters = @{@"id": tweet.idStr};
+    [self POST:finalString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
+        Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
+        completion(tweet, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(nil, error);
+    }];
+}
+
+- (void)unfavorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion
+{
     
     NSString *urlString = @"1.1/favorites/destroy.json";
     NSDictionary *parameters = @{@"id": tweet.idStr};

@@ -26,7 +26,8 @@
 }
 
 - (IBAction)didTapLogin:(id)sender {
-    [[APIManager shared] loginWithCompletion:^(BOOL success, NSError *error) {
+    [[APIManager shared] loginWithCompletion:^(BOOL success, NSError *error)
+{
         if (success) {
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];
         } else {
@@ -35,14 +36,20 @@
     }];
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+   
+        id vc = [segue destinationViewController];
+    
+    
 }
-*/
+
 
 @end
