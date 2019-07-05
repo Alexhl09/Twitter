@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ComposeViewController : UIViewController
 @property (weak, nonatomic) IBOutlet SFCircleGradientView *circleCountCharacters;
 @property (weak, nonatomic) IBOutlet UITextView *tweetTextView;
-@property (nonatomic, weak) id<ComposeViewControllerDelegate> delegate;
+@property (nonatomic, weak) id <ComposeViewControllerDelegate> delegate;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -9,10 +9,18 @@
 #import "TweetCell.h"
 #import "../API/APIManager.h"
 
+// This is my custom table view cell that i am going to resuse through all the app 
+
 @implementation TweetCell
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
+
+    [self.profilePicture addGestureRecognizer:profileTapGestureRecognizer];
+    [self.profilePicture setUserInteractionEnabled:YES];
+    
     // Initialization code
 }
 
@@ -152,6 +160,12 @@
     [self.retweetButton setTitle: [NSString stringWithFormat:@"%i", [self.tweet retweetCount]] forState:(UIControlStateNormal)];
     
     
+}
+
+- (void) didTapUserProfile:(UITapGestureRecognizer *)sender{
+    // TODO: Call method on delegate
+    [self.delegate tweetCell:self didTap:self.tweet.user];
+
 }
 
 

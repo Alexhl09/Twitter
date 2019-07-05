@@ -10,7 +10,7 @@
 #import "../Models/Tweet.h"
 #import "TTTAttributedLabel.h"
 NS_ASSUME_NONNULL_BEGIN
-
+@protocol TweetCellDelegate;
 @interface TweetCell : UITableViewCell
 @property (weak, nonatomic) Tweet * tweet;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicture;
@@ -21,11 +21,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *replyButton;
 @property (weak, nonatomic) IBOutlet UIButton *retweetButton;
 @property (weak, nonatomic) IBOutlet UIButton *loveButton;
-@property (weak, nonatomic) IBOutlet UIButton *messageButton;
+@property (nonatomic, weak) id<TweetCellDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIImageView *imageTweet;
+
 
 -(void) refreshDataAfterFavorite;
 -(void) refreshDataAfterRetweet;
 
+@end
+@protocol TweetCellDelegate
+- (void)tweetCell:(TweetCell *) tweetCell didTap: (User *)user;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -10,10 +10,19 @@
 #import "APIManager.h"
 #import "ComposeViewController.h"
 #import "../Cells/TweetCell.h"
+#import "../Models/User.h"
+#import "ProfileTweetViewController.h"
+#import "DetailViewController.h"
+@import DateTools;
 
 @import AFNetworking;
-@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, TTTAttributedLabelDelegate>
+@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, TTTAttributedLabelDelegate, TweetCellDelegate, TweetDetailDelegate>
 
+// My View Controller has a table View that is going to display all my tweets
+@property (weak, nonatomic) IBOutlet UITableView *tableViewTimeline;
+@property (strong, nonatomic) NSMutableArray * myTweets;
+@property (strong, nonatomic) User * userSelected;
+@property (strong, nonatomic) Tweet * tweetSelected;
 @end
 
 
@@ -26,6 +35,10 @@
     _tableViewTimeline.delegate = self;
     _tableViewTimeline.dataSource = self;
     
+    
+    _tableViewTimeline.rowHeight = UITableViewAutomaticDimension;
+    _tableViewTimeline.estimatedRowHeight = UITableViewAutomaticDimension;
+
     _myTweets = [NSArray new];
     
  
@@ -45,9 +58,9 @@
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error)
      {
          if (tweets) {
-             NSLog(@"😎😎😎 Successfully loaded home timeline");
-             NSLog(@"%@",tweets);
+            
              _myTweets = tweets;
+         
              [_tableViewTimeline reloadData];
          } else {
              NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
@@ -73,7 +86,9 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    static NSString *celldentifier = @"cell";
+       static NSMutableString *celldentifier = @"cell";
+   
+    
     
     TweetCell *myCell = [_tableViewTimeline dequeueReusableCellWithIdentifier:celldentifier];
   
@@ -92,12 +107,26 @@
     // Automatically detect links when the label text is subsequently changed
     myCell.tweetLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink;
     myCell.tweetLabel.delegate = self;
+//    
+//    if([_myTweets[indexPath.row] entities] == nil){
+//        [myCell.imageTweet setHidden:YES];
+//        
+//    }else
+//    {
+//        [myCell.imageTweet setHidden:NO];
+//        NSDictionary * myUrl = [_myTweets[indexPath.row] entities][0];
+//        [myCell.imageView setImageWithURL:[NSURL URLWithString: myUrl[@"media_url_https"]]];
+//    }
+    
+
 
   myCell.tweetLabel.text = attString;
     myCell.nameLabel.text = [[tweet user] name];
     NSString *atForUserName = @"@";
     myCell.userLabel.text = [atForUserName stringByAppendingString: [[tweet user] screenName]];
-    myCell.dateLabel.text = [tweet createdAtString];
+    NSDate * dateTweet = [NSDate dateWithString:[tweet createdAtString] formatString:@"MM/dd/yy"];
+    myCell.dateLabel.text = [dateTweet shortTimeAgoSinceNow];
+    
     
     // Get the profile image from the url
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[[tweet user] urlProfilePhoto]]];
@@ -105,7 +134,7 @@
     [myCell.profilePicture setImageWithURLRequest:request placeholderImage:nil
                                       success:^(NSURLRequest *imageRequest, NSHTTPURLResponse *imageResponse, UIImage *image) {
                                           
-                                          [UIView transitionWithView:myCell.profilePicture duration:1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                                          [UIView transitionWithView:myCell.profilePicture duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                                               [myCell.profilePicture setImage:image];
                                           } completion:nil];
                                           
@@ -126,8 +155,33 @@
     //My cell is going to get the number of retweets the tweet got before
     [myCell.retweetButton setTitle: [NSString stringWithFormat:@"%i", [tweet retweetCount]] forState:(UIControlStateNormal)];
     
+    if(tweet.retweeted)
+    {
+        [myCell.retweetButton setImage: [UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateNormal];
+        [myCell.retweetButton setSelected:NO];
+        
+        
+    }else
+    {
+        [myCell.retweetButton setImage: [UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
+        [myCell.retweetButton setSelected:NO];
+        
+    }
     
     
+    if(tweet.favorited)
+    {
+        [myCell.loveButton setImage: [UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateNormal];
+        [myCell.loveButton setSelected:NO];
+        
+        
+    }else
+    {
+        [myCell.loveButton setImage: [UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
+        [myCell.loveButton setSelected:NO];
+        
+    }
+    myCell.delegate = self;
     
     
     return myCell;
@@ -135,6 +189,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    _tweetSelected = _myTweets[indexPath.row];
+    [self performSegueWithIdentifier:@"detailTweet" sender:self];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -156,11 +212,23 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    UINavigationController *navigationController = [segue destinationViewController];
-    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
-    composeController.delegate = self;
+    if([[segue identifier] isEqualToString:@"composite"])
+    {
+        UINavigationController *navigationController = [segue destinationViewController];
+        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+        composeController.delegate = self;
+    }else if ([[segue identifier] isEqualToString:@"detailTweet"]){
+        DetailViewController * vc = [segue destinationViewController];
+        [vc setTweet:_tweetSelected];
+        vc.delegate = self;
+    }else
+    {
+        ProfileTweetViewController * vc = [segue destinationViewController];
+        
+        [vc setUserTweet: _userSelected];
+        
+    }
 }
-
 
 
 - (void)didTweet:(nonnull Tweet *)tweet
@@ -175,12 +243,30 @@
 - (void)beginRefresh:(UIRefreshControl *)refreshControl
 {
     
-
-    [_tableViewTimeline reloadData];
+ [self getTimeline];
+   
     
     // Tell the refreshControl to stop spinning
     [refreshControl endRefreshing];
 }
 
+- (void)tweetCell:(TweetCell *)tweetCell didTap:(User *)user
+{
+    // TODO: Perform segue to profile view controller
+    _userSelected = user;
+
+    [self performSegueWithIdentifier:@"profileSegue" sender:user];
+
+}
+
+
+
+
+- (void)tweetModified:(nonnull Tweet *)tweet
+{
+    NSLog(@"hola");
+    [self getTimeline];
+    
+}
 
 @end

@@ -19,4 +19,9 @@
 - (void)unfavorite:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion;
 - (void)retweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion;
 - (void)unretweet:(Tweet *)tweet completion:(void (^)(Tweet *, NSError *))completion;
+- (void)trends:(void(^)(NSArray *tweets, NSError *error))completion;
+-(void) searchTweet: (NSString *) searchKey  completion:(void(^)(NSDictionary *tweets, NSError *error))completion;
+-(void) getTweetsUser: (NSString * ) username completion:(void(^)(NSArray *tweets, NSError *error))completion;
+-(void) getUser: (void(^)(NSDictionary *infoUser, NSError *error))completion;
+-(void) getMessages: (void(^)(NSDictionary *messages, NSError *error))completion;
 @end

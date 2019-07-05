@@ -8,7 +8,7 @@ target 'twitter' do
   pod 'BDBOAuth1Manager'
   pod 'TTTAttributedLabel'
   pod 'SFProgressCircle'
-
+pod 'DateTools'
 
   # Pods for twitter
 
