@@ -45,7 +45,7 @@
     [self.searchBar resignFirstResponder];
 }
 
-///This method filters all the movies using my array and creating a new one that is used to populate the cells
+///This method filters all the trends using my array and creating a new one that is used to populate the cells
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     
     if (searchText.length != 0) {
@@ -65,6 +65,9 @@
     [self.tableViewTrends reloadData];
     
 }
+/**
+ This method get the most popular trends around the world by a call to the API Manager
+ */
 
 -(void) getTrends
 {
@@ -98,6 +101,7 @@
     // Pass the selected object to the new view controller.
 }
 */
+/// This method is going to send the selected trend to the other view with all the tweets about that topic
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     TweetsTrendsViewController * vc = [segue destinationViewController];
     [vc setKeyWord:_selectedTrend];
@@ -117,6 +121,7 @@
     return _trendsRightNowFiltered.count;
 }
 
+/// Here I get the tweet selected in the table view and use it to prepare the data that I am going to send
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

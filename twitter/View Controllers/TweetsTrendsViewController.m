@@ -34,6 +34,10 @@
 }
 
 
+/**
+ This method is going to send a call to the API manager that is going to look for all the tweets related to the topic that was selected in the previous view.
+ */
+
 -(void) getTrendsTweets
 {
     

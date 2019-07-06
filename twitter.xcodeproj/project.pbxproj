@@ -19,6 +19,7 @@
 		6AD2790920BCC04D0085BC29 /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD2790820BCC04D0085BC29 /* TimelineViewController.m */; };
 		EA2B8FA722CAA334009E9CB3 /* TweetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2B8FA622CAA334009E9CB3 /* TweetCell.m */; };
 		EA2B8FAA22CAAB8A009E9CB3 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2B8FA922CAAB8A009E9CB3 /* ComposeViewController.m */; };
+		EA4B64DA22D013DC0036128D /* MentionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4B64D922D013DC0036128D /* MentionsViewController.m */; };
 		EA9AED4B22CC03A9004E7C1F /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9AED4A22CC03A9004E7C1F /* TabBarViewController.m */; };
 		EAA4B58A22CA8B450098BFEC /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA4B58922CA8B450098BFEC /* User.m */; };
 		EAA4B58D22CA8BA40098BFEC /* Tweet.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA4B58C22CA8BA40098BFEC /* Tweet.m */; };
@@ -28,6 +29,7 @@
 		EAAE05BB22CD3F4C0008C853 /* ProfileTweetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAAE05BA22CD3F4C0008C853 /* ProfileTweetViewController.m */; };
 		EAAE05BE22CD78AB0008C853 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAAE05BD22CD78AB0008C853 /* MessagesViewController.m */; };
 		EAAE05C122CECA9B0008C853 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAAE05C022CECA9B0008C853 /* DetailViewController.m */; };
+		EAAE05C322CFEBEE0008C853 /* GIFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAE05C222CFEBEE0008C853 /* GIFViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,8 @@
 		EA2B8FA622CAA334009E9CB3 /* TweetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweetCell.m; sourceTree = "<group>"; };
 		EA2B8FA822CAAB8A009E9CB3 /* ComposeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
 		EA2B8FA922CAAB8A009E9CB3 /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
+		EA4B64D822D013DC0036128D /* MentionsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MentionsViewController.h; sourceTree = "<group>"; };
+		EA4B64D922D013DC0036128D /* MentionsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MentionsViewController.m; sourceTree = "<group>"; };
 		EA9AED4922CC03A9004E7C1F /* TabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabBarViewController.h; sourceTree = "<group>"; };
 		EA9AED4A22CC03A9004E7C1F /* TabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabBarViewController.m; sourceTree = "<group>"; };
 		EAA4B58822CA8B450098BFEC /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -72,6 +76,8 @@
 		EAAE05BD22CD78AB0008C853 /* MessagesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessagesViewController.m; sourceTree = "<group>"; };
 		EAAE05BF22CECA9B0008C853 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		EAAE05C022CECA9B0008C853 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		EAAE05C222CFEBEE0008C853 /* GIFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFViewController.swift; sourceTree = "<group>"; };
+		EAAE05C422CFFABD0008C853 /* twitter-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "twitter-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,16 +178,17 @@
 		6AD2790320BCC01B0085BC29 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EAAE05C422CFFABD0008C853 /* twitter-Bridging-Header.h */,
 				6AD2790420BCC0380085BC29 /* LoginViewController.h */,
 				6AD2790520BCC0380085BC29 /* LoginViewController.m */,
 				6AD2790720BCC04D0085BC29 /* TimelineViewController.h */,
 				6AD2790820BCC04D0085BC29 /* TimelineViewController.m */,
+				EAAE05AE22CC5C580008C853 /* ProfileViewController.m */,
 				EA2B8FA822CAAB8A009E9CB3 /* ComposeViewController.h */,
 				EA2B8FA922CAAB8A009E9CB3 /* ComposeViewController.m */,
 				EA9AED4922CC03A9004E7C1F /* TabBarViewController.h */,
 				EA9AED4A22CC03A9004E7C1F /* TabBarViewController.m */,
 				EAAE05AD22CC5C580008C853 /* ProfileViewController.h */,
-				EAAE05AE22CC5C580008C853 /* ProfileViewController.m */,
 				EAAE05B322CD047A0008C853 /* TrendsViewController.h */,
 				EAAE05B422CD047A0008C853 /* TrendsViewController.m */,
 				EAAE05B622CD1C970008C853 /* TweetsTrendsViewController.h */,
@@ -192,6 +199,9 @@
 				EAAE05BD22CD78AB0008C853 /* MessagesViewController.m */,
 				EAAE05BF22CECA9B0008C853 /* DetailViewController.h */,
 				EAAE05C022CECA9B0008C853 /* DetailViewController.m */,
+				EAAE05C222CFEBEE0008C853 /* GIFViewController.swift */,
+				EA4B64D822D013DC0036128D /* MentionsViewController.h */,
+				EA4B64D922D013DC0036128D /* MentionsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -217,6 +227,7 @@
 				6AD278D220BC4B950085BC29 /* Frameworks */,
 				6AD278D320BC4B950085BC29 /* Resources */,
 				F9085D39F7C6510E12BAD47F /* [CP] Embed Pods Frameworks */,
+				31CA33DD45D3DE8C33E7CBC4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -274,6 +285,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		31CA33DD45D3DE8C33E7CBC4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-twitter/Pods-twitter-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-twitter/Pods-twitter-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-twitter/Pods-twitter-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3AC6ABBCB3262E1BBD6DB086 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -332,11 +360,13 @@
 				EAAE05B522CD047A0008C853 /* TrendsViewController.m in Sources */,
 				EA9AED4B22CC03A9004E7C1F /* TabBarViewController.m in Sources */,
 				EAAE05BE22CD78AB0008C853 /* MessagesViewController.m in Sources */,
+				EA4B64DA22D013DC0036128D /* MentionsViewController.m in Sources */,
 				6AD278DA20BC4B950085BC29 /* AppDelegate.m in Sources */,
 				6AD278F620BCB68B0085BC29 /* APIManager.m in Sources */,
 				EAAE05AF22CC5C580008C853 /* ProfileViewController.m in Sources */,
 				EAAE05BB22CD3F4C0008C853 /* ProfileTweetViewController.m in Sources */,
 				6AD2790920BCC04D0085BC29 /* TimelineViewController.m in Sources */,
+				EAAE05C322CFEBEE0008C853 /* GIFViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,7 +510,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XYQR9G9T5T;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = twitter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -503,7 +533,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XYQR9G9T5T;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = twitter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

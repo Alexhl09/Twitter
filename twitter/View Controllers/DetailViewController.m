@@ -84,6 +84,7 @@
         }];
         [_retweetButton setImage: [UIImage imageNamed:@"retweet-icon"] forState:UIControlStateNormal];
         [_retweetButton setSelected:NO];
+        [_tweet setRetweeted:NO];
     }else
     {
         _tweet.retweetCount += 1;
@@ -92,6 +93,7 @@
         }];
         [_retweetButton setImage: [UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateNormal];
         [_retweetButton setSelected:NO];
+        [_tweet setRetweeted:YES];
     }
        [_retweetButton setTitle: [NSString stringWithFormat:@"%i", [_tweet retweetCount]] forState:(UIControlStateNormal)];
     [self tweetModified:_tweet];
@@ -105,6 +107,7 @@
         [[APIManager shared] unfavorite:_tweet completion:^(Tweet * tweet, NSError * error) {
             [_favoriteButton setImage: [UIImage imageNamed:@"favor-icon"] forState:UIControlStateNormal];
             [_favoriteButton setSelected:NO];
+            [_tweet setFavorited:NO];
         }];
     }else
     {
@@ -112,6 +115,7 @@
         [[APIManager shared] favorite:_tweet completion:^(Tweet * tweet, NSError * error) {
             [_favoriteButton setImage: [UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateNormal];
             [_favoriteButton setSelected:NO];
+            [_tweet setFavorited:YES];
             
         }];
     }
@@ -119,7 +123,7 @@
     [_favoriteButton setTitle: [NSString stringWithFormat:@"%i", [_tweet favoriteCount]] forState:(UIControlStateNormal)];
     
   
-[self tweetModified:_tweet];
+    [self tweetModified:_tweet];
 }
 
 

@@ -2,5 +2,8 @@ ${PODS_ROOT}/Target Support Files/Pods-twitter/Pods-twitter-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework
 ${BUILT_PRODUCTS_DIR}/BDBOAuth1Manager/BDBOAuth1Manager.framework
 ${BUILT_PRODUCTS_DIR}/DateTools/DateTools.framework
+${BUILT_PRODUCTS_DIR}/DeepDiff/DeepDiff.framework
+${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework
 ${BUILT_PRODUCTS_DIR}/SFProgressCircle/SFProgressCircle.framework
 ${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework
+${BUILT_PRODUCTS_DIR}/libwebp/libwebp.framework

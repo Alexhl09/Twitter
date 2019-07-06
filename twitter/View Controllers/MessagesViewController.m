@@ -26,6 +26,10 @@
     // Do any additional setup after loading the view.
 }
 
+/**
+ This method is going to get teh most recent messages of the user by a call to the API Manager that is going to return an Array that populate my cells
+ 
+ */
 -(void) getMessages
 {
     // Get timeline

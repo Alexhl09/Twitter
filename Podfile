@@ -10,6 +10,8 @@ target 'twitter' do
   pod 'SFProgressCircle'
 pod 'DateTools'
 
+pod 'Giphy'
+
   # Pods for twitter
 
 end

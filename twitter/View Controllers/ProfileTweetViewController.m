@@ -58,6 +58,11 @@
 //    }
     
     [self getMyTweets];
+    
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(getMyTweets) forControlEvents:UIControlEventValueChanged];
+    [_myTweetsTableView insertSubview:refreshControl atIndex:0];
     // Do any additional setup after loading the view.
 }
 
@@ -93,7 +98,7 @@
     TweetCell * myCell = [tableView dequeueReusableCellWithIdentifier:identifier];
     User * user = [_myTweets[indexPath.row] user];
     myCell.nameLabel.text = [user name];
-    myCell.userLabel.text = [user screenName];
+    myCell.userLabel.text = [[NSString stringWithFormat:@"@"] stringByAppendingString:[user screenName]];
     myCell.tweetLabel.text = [_myTweets[indexPath.row] text];
     
     [myCell.profilePicture setImageWithURL:[NSURL URLWithString: [user urlProfilePhoto]]];
@@ -144,6 +149,10 @@
     return _myTweets.count;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
 
 

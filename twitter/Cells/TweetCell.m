@@ -30,6 +30,8 @@
     // Configure the view for the selected state
 }
 
+// An IBAction that changes the data of the tweet that has been marked as retweeted
+
 - (IBAction)didTapRetweet:(UIButton *)sender {
     if(!self.tweet.retweeted)
     {
@@ -73,6 +75,7 @@
     
     
 }
+// An IBAction that changes the data of the tweet that has been marked as favorite
 
 
 - (IBAction)didTapFavorite:(UIButton *)sender {
@@ -125,6 +128,9 @@
         
     }
 }
+
+// Refresh the data of the cell and changes the image of the button to the red one if it was favorited
+
 -(void) refreshDataAfterFavorite{
     if(self.tweet.favorited)
     {
@@ -143,6 +149,7 @@
     
 }
 
+// Refresh the data of the cell and changes the image of the button to the green one if it was retweeted
 
 -(void) refreshDataAfterRetweet{
     if(self.tweet.retweeted)
@@ -161,6 +168,8 @@
     
     
 }
+
+// Its a method that indicates if someone has taped on the photo of the tweet's user.
 
 - (void) didTapUserProfile:(UITapGestureRecognizer *)sender{
     // TODO: Call method on delegate

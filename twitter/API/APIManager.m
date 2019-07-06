@@ -267,10 +267,21 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
 
 
 
+/**
+ This funtion is going to get the tweets from the username
+ 
+ - Parameters:
+ - username: This is the user name that allows me to get all the tweets from that specific user
+ 
+ 
+ - Returns:
+ - tweets: This is an array that is going to contain dictionaries of tweets
+ -  error: This is an error that is going to help me understand the reason why I cannot have the information of the tweets
+ */
 -(void) getTweetsUser: (NSString * ) username completion:(void(^)(NSArray *tweets, NSError *error))completion
 {
     NSDictionary *parameters = @{@"screen_name": username};
-    
+
     
     [self GET:@"1.1/statuses/user_timeline.json"
    parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable tweetDictionaries) {
@@ -284,7 +295,17 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
        completion(nil, error);
    }];
 }
-
+/**
+ This funtion is going to get the information of the user autheticated
+ 
+ - Parameters:
+ - nil
+ 
+ 
+ - Returns:
+ - tweets: This is an array that is going to contain dictionaries of the user's information
+ -  error: This is an error that is going to help me understand the reason why I cannot have the information of the user
+ */
 -(void) getUser: (void(^)(NSDictionary *infoUser, NSError *error))completion
 {
 
@@ -303,17 +324,61 @@ static NSString * const consumerSecret = @"s5ynGqXzstUZwFPxVyMDkYh197qvHOcVM3kwv
    }];
 }
 
+/**
+ This funtion is going to get the messages of the current user
+ 
+ - Parameters:
+ - nil
+ 
+ 
+ - Returns:
+ - messages: This is an array that is going to contain dictionaries of the user's information
+ -  error: This is an error that is going to help me understand the reason why I cannot have the information of the user
+ */
 -(void) getMessages: (void(^)(NSDictionary *messages, NSError *error))completion
 {
     
     
     
     [self GET:@"1.1/direct_messages/events/list.json"
-   parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable tweetDictionaries) {
+   parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable messages) {
        
        
        
-       completion(tweetDictionaries, nil);
+       completion(messages, nil);
+       
+   } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+       
+       completion(nil, error);
+   }];
+}
+
+
+/**
+ This funtion is going to get the mentions of the current user
+ 
+ - Parameters:
+ - nil
+ 
+ 
+ - Returns:
+ - messages: This is an array that is going to contain dictionaries of the user's metions
+ -  error: This is an error that is going to help me understand the reason why I cannot have the information of the user
+ */
+
+-(void) getMentions: (void(^)(NSArray *mentions, NSError *error))completion
+{
+    
+
+
+    
+    [self GET:@"1.1/statuses/mentions_timeline.json"
+   parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable mentions) {
+       
+       
+       NSMutableArray *tweets  = [Tweet tweetsWithArray:mentions];
+       completion(tweets, nil);
+  
        
    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
        

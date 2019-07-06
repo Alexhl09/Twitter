@@ -41,6 +41,12 @@
     // Do any additional setup after loading the view.
 }
 
+
+/**
+ This method gets the information of the user, and call the API Manager to get the information of that profile
+ Parameters:
+ - Screenname: that is a variable in the view controller taht is sent by the previuos view controller
+ */
 -(void) getUser
 {
 
@@ -57,6 +63,13 @@
          }
      }];
 }
+
+/**
+ This is a method to go back to the first View controller and sign in witha  different account
+ 
+ Parameters:
+ -sender
+ */
 - (IBAction)loggingOut:(UIBarButtonItem *)sender {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
@@ -140,11 +153,17 @@
     return myCell;
 }
 
+
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
  
      return _myTweets.count;
     
 }
+
+
+/**
+This getTweetsUser method in the API Manager uses the variable myProfileName and get all the tweets from that user, and then reload all the data to populate again the cells with all the tweets taht we received from the API MAnager
+ */
 
 -(void) getMyTweets
 {
@@ -162,5 +181,9 @@
     
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
 @end

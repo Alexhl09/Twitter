@@ -8,8 +8,11 @@
 
 #import "ComposeViewController.h"
 #import "APIManager.h"
+#import "twitter-Swift.h"
 
-@interface ComposeViewController () 
+@interface ComposeViewController ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageGif;
 
 @end
 
@@ -28,6 +31,10 @@
     
     
 }
+
+/** If the user tap on create a new tweet, this is going to be posted by the API Manager.
+ And if it is successful I am going to call the protocol method and send the tweet that it was tweeted
+ */
 - (IBAction)didTapPost:(UIBarButtonItem *)sender
 {
     NSString * myTweet = _tweetTextView.text;
@@ -50,7 +57,8 @@
     
     [_tweetTextView resignFirstResponder];
 }
-
+/** There is a circle as animation to let know the user how many characters are left
+ */
 - (void)textViewDidChange:(UITextView *)textView
 {
     NSUInteger length;
@@ -59,7 +67,8 @@
     _circleCountCharacters.progress = 1.0 - ((double) length / (double) 140);
    
 }
-
+/** The text view is not going to allow more than 140 characters
+ */
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     return textView.text.length + (text.length - range.length) <= 140;
@@ -74,6 +83,13 @@
 -(void) getGIF
 {
     
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    GIFViewController * vc = [segue destinationViewController];
+
+
 }
 /*
 #pragma mark - Navigation

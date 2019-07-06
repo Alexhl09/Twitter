@@ -7,12 +7,13 @@
 //
 
 #import "TimelineViewController.h"
-#import "APIManager.h"
+#import "../API/APIManager.h"
 #import "ComposeViewController.h"
 #import "../Cells/TweetCell.h"
 #import "../Models/User.h"
 #import "ProfileTweetViewController.h"
 #import "DetailViewController.h"
+#import "twitter-Swift.h"
 @import DateTools;
 
 @import AFNetworking;
@@ -35,23 +36,29 @@
     _tableViewTimeline.delegate = self;
     _tableViewTimeline.dataSource = self;
     
-    
+    // The height of my the cells inside the table view is going to be determined by the view controller
     _tableViewTimeline.rowHeight = UITableViewAutomaticDimension;
     _tableViewTimeline.estimatedRowHeight = UITableViewAutomaticDimension;
 
     _myTweets = [NSArray new];
     
  
-    
+    // Here I get the timeline of all the tweets from the user
+
     [self getTimeline];
    
+    // Here I insert the refresh control in the table view and add teh target of calling the API again
 
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [_tableViewTimeline insertSubview:refreshControl atIndex:0];
 }
 
-
+/**
+ This method gets the tweets of the user's timeline and store the result in my view controller in order to reload all my cells
+ 
+ Parameters: nil
+ */
 -(void) getTimeline
 {
     // Get timeline
@@ -95,7 +102,6 @@
     Tweet * tweet =  [_myTweets objectAtIndex:indexPath.row];
     // My cell is going to receive the information of the tweet
     [myCell setTweet: tweet];
-    TTTAttributedLabel *attributedLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
     
     NSAttributedString *attString = [[NSAttributedString alloc] initWithString:[tweet text]
                                                                     attributes:@{
@@ -155,6 +161,9 @@
     //My cell is going to get the number of retweets the tweet got before
     [myCell.retweetButton setTitle: [NSString stringWithFormat:@"%i", [tweet retweetCount]] forState:(UIControlStateNormal)];
     
+    
+    //Here I have to knbow if the tweet has retweeted and change the image of the button
+
     if(tweet.retweeted)
     {
         [myCell.retweetButton setImage: [UIImage imageNamed:@"retweet-icon-green"] forState:UIControlStateNormal];
@@ -168,7 +177,8 @@
         
     }
     
-    
+    //Here I have to knbow if the tweet has favorited and change the image of the button
+
     if(tweet.favorited)
     {
         [myCell.loveButton setImage: [UIImage imageNamed:@"favor-icon-red"] forState:UIControlStateNormal];
@@ -187,6 +197,9 @@
     return myCell;
 }
 
+
+//Here I get the tweet that was selected and send it to the details view  controller
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     _tweetSelected = _myTweets[indexPath.row];
@@ -204,19 +217,28 @@
     return UIStatusBarStyleLightContent;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewAutomaticDimension;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 170;
+    return UITableViewAutomaticDimension;
 }
-
+// Here I prepare the data that is going to be sent to the other view
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if([[segue identifier] isEqualToString:@"composite"])
     {
+     
+        
         UINavigationController *navigationController = [segue destinationViewController];
         ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
         composeController.delegate = self;
+        
+        
+   
     }else if ([[segue identifier] isEqualToString:@"detailTweet"]){
         DetailViewController * vc = [segue destinationViewController];
         [vc setTweet:_tweetSelected];
@@ -230,6 +252,7 @@
     }
 }
 
+// If I tweet something in the composeViewController is going to be added to the Timeline and reload the table view
 
 - (void)didTweet:(nonnull Tweet *)tweet
 {
@@ -249,6 +272,7 @@
     // Tell the refreshControl to stop spinning
     [refreshControl endRefreshing];
 }
+// If I tap inside the cell I perform a segue to the profile of the person who tweeted
 
 - (void)tweetCell:(TweetCell *)tweetCell didTap:(User *)user
 {
@@ -260,6 +284,7 @@
 }
 
 
+// If a tweet is modified inside the detail view controller, now I can change the values of the button and change the image relaoding the timeline again, thanks to the protocol that I created
 
 
 - (void)tweetModified:(nonnull Tweet *)tweet

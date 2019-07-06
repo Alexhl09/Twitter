@@ -24,4 +24,5 @@
 -(void) getTweetsUser: (NSString * ) username completion:(void(^)(NSArray *tweets, NSError *error))completion;
 -(void) getUser: (void(^)(NSDictionary *infoUser, NSError *error))completion;
 -(void) getMessages: (void(^)(NSDictionary *messages, NSError *error))completion;
+-(void) getMentions: (void(^)(NSArray *mentions, NSError *error))completion;
 @end
