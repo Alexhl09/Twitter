@@ -3,7 +3,7 @@
 **Twitter** is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
 
 Time spent: **20** hours spent in total
-
+http://recordit.co/rxkG3iwzaF
 ## User Stories
 
 The following **Required** functionality is completed:
@@ -57,7 +57,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 Here's a walkthrough of implemented user stories:
 
 <img src='http://g.recordit.co/rxkG3iwzaF.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-Complete Vi(http://recordit.co/rxkG3iwzaF).
+Complete Video(http://recordit.co/rxkG3iwzaF).
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
