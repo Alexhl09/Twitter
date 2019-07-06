@@ -31,13 +31,13 @@ The following **optional** features are implemented:
 - [x] User can tap the profile image in any tweet to see another user's profile
   - Contains the user header view: picture and tagline
   - Contains a section with the users basic stats: # tweets, # following, # followers
-- [x] User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
+- [ ] User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
 - [x] When composing, you should have a countdown for the number of characters remaining for the tweet (out of 140) (**1 point**)
 - [x] After creating a new tweet, a user should be able to view it in the timeline immediately without refetching the timeline from the network.
 - [ ] User can reply to any tweet, and replies should be prefixed with the username and the reply_id should be set when posting the tweet (**2 points**)
 - [ ] User sees embedded images in tweet if available
 - [x] User can switch between timeline, mentions, or profile view through a tab bar (**3 points**)
-- [x] Profile Page: pulling down the profile page should blur and resize the header image. (**4 points**)
+- [ ] Profile Page: pulling down the profile page should blur and resize the header image. (**4 points**)
 
 
 The following **additional** features are implemented:
